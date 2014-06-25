@@ -7,13 +7,24 @@ if ($time !~ /^\d+$/) {
     exit(1);
 }
 
-my ($S,$M,$H,$d,$m,$Y) = localtime($time);
-$m += 1;
-$Y += 1900;
-my $dt = sprintf("%04d-%02d-%02d %02d:%02d:%02d", $Y,$m,$d, $H,$M,$S);
-
-print $dt, "\n";
+XXX($time);
 exit (0);
+
+
+sub XXX {
+    my $time = shift;
+    my ($S,$M,$H,$d,$m,$Y) = localtime($time);
+    $m += 1;
+    $Y += 1900;
+
+    if ($Y > 3000) {
+        $time = $time/1000;
+        return XXX($time);
+    }
+
+    my $dt = sprintf("%04d-%02d-%02d %02d:%02d:%02d", $Y,$m,$d, $H,$M,$S);
+    print $dt, "\n";
+}
 
 sub usage {
     print "$0 <unix_timestamp>\n";
