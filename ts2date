@@ -1,0 +1,20 @@
+#!/usr/bin/perl 
+
+my $time = $ARGV[0];
+
+if ($time !~ /^\d+$/) {
+    usage();
+    exit(1);
+}
+
+my ($S,$M,$H,$d,$m,$Y) = localtime($time);
+$m += 1;
+$Y += 1900;
+my $dt = sprintf("%04d-%02d-%02d %02d:%02d:%02d", $Y,$m,$d, $H,$M,$S);
+
+print $dt, "\n";
+exit (0);
+
+sub usage {
+    print "$0 <unix_timestamp>\n";
+}
