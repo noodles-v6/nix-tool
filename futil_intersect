@@ -1,0 +1,10 @@
+#!/usr/bin/perl 
+use Array::Utils qw(:all);
+
+my @a = map { s/^\s+|\s$//g; $_ } `cat $ARGV[0]`;
+my @b = map { s/^\s+|\s$//g; $_ } `cat $ARGV[1]`;
+
+my @intersect = intersect(@a, @b);
+for (@intersect) {
+    print "$_\n";
+}

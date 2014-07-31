@@ -1,0 +1,36 @@
+#!/usr/bin/perl 
+
+use WWW::Google::Translate;
+
+my $src = $ARGV[0];
+print $src;
+
+my $wgt = WWW::Google::Translate->new({ 
+        key => 'AIzaSyDjCRrzikh5aMbT7_1pIlP203MmqP-QNY0',
+        default_source => 'en',
+        default_target => 'zh',
+        data_format    => 'perl',
+        timeout        => 20,
+});
+
+my $source = 'en';
+my $target = 'ja';
+
+if( $src !~ /^\w+$/ ) {
+    $source = 'zh';
+    $target = 'en';
+}
+
+my $r = $wgt->translate({
+        q => $src,
+        source => $source,
+        target => $target,
+});
+
+print "+++++\n";
+for ( @{ $r->{data}->{translations} } ) {
+    print $_->{translatedText}, "\n";
+}
+
+
+
